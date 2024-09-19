@@ -5,7 +5,38 @@
     <link rel="stylesheet" type="text/css" href="main.css" />
   </head>
   <body>
-    <div id="app">{{ fullName() }}</div>
+    <div id="app" v-cloak>
+      <a v-bind:href="url">Google link</a>
+      <a :href="url">Google link</a>
+      <p>{{ fullName }}</p>
+      <p>{{ firstName }}</p>
+      <p>{{age}}</p>
+
+      <label>First Name</label>
+      <input type="text" v-model="firstName" />
+      <!-- <input type="text" v-model.lazy.trim="firstName" /> -->
+
+      <label>Middle Name</label>
+      <!-- will only update on enter -->
+      <input type="text" @keyup.enter="handleMiddleChange" />
+
+      <label>Last Name</label>
+      <input type="text" v-model="lastName" />
+
+      <label>Last Name</label>
+      <input
+        type="text"
+        :value="lastName"
+        @input.prevent="handleChange('Lastname event triggered!', $event)"
+      />
+
+      <label>Age</label>
+      <input type="number" v-model.number="age" />
+
+      <button v-on:click="increment">Increment</button>
+      <button @click="increment">Increment</button>
+      <button v-on:click="age--">Decrement</button>
+    </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="app.js"></script>
